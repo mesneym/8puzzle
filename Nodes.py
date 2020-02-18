@@ -31,44 +31,54 @@ class Node:
     def nodeState(self):
         return self._nodeState 
 
-    def actionMoveLeft(self):
-        i,j= np.add(self._blankTileLoc,[-1,0])
+    def moveTile(self,direction):
+        i,j= np.add(self._blankTileLoc,direction)
         if(i>=0  and i<3 and j>=0 and j<3):
             newNode = copy.deepcopy(self)
             temp = newNode._nodeState[i,j]
-            newNode.nodeState[i,j]=newNode.nodeState[newNode.blackTileLoc[0,0],newNode._blackTileLoc[0,1]]
-            newNode._nodeState[newNode._blackTileLoc[0,0],newNode._blackTileLoc[0,1]] = temp
+            newNode.nodeState[i,j]=newNode.nodeState[newNode.blankTileLoc[0,0],newNode.blankTileLoc[0,1]]
+            newNode._nodeState[newNode.blankTileLocation[0,0],newNode.blankTileLocation[0,1]] = temp
             return [True,newNode]
-        return [False,newNode]
+        return [False,None]
 
-    def actionMoveRight(self):
-        i,j= np.add(self._blankTileLoc,[1,0])
-        if(i>=0  and i<3 and j>=0 and j<3):
-            newNode = copy.deepcopy(self)
-            temp = newNode._nodeState[i,j]
-            newNode.nodeState[i,j]=newNode.nodeState[newNode.blackTileLoc[0,0],newNode._blackTileLoc[0,1]]
-            newNode._nodeState[newNode._blackTileLoc[0,0],newNode._blackTileLoc[0,1]] = temp
-            return [True,newNode]
-        return [False,NewNode]
+    # def actionMoveLeft(self):
+        # i,j= np.add(self._blankTileLoc,[-1,0])
+        # if(i>=0  and i<3 and j>=0 and j<3):
+            # newNode = copy.deepcopy(self)
+            # temp = newNode._nodeState[i,j]
+            # newNode.nodeState[i,j]=newNode.nodeState[newNode.blankTileLoc[0,0],newNode.blankTileLoc[0,1]]
+            # newNode._nodeState[newNode.blankTileLocation[0,0],newNode.blankTileLocation[0,1]] = temp
+            # return [True,newNode]
+        # return [False,None]
+
+    # def actionMoveRight(self):
+        # i,j= np.add(self._blankTileLoc,[1,0])
+        # if(i>=0  and i<3 and j>=0 and j<3):
+            # newNode = copy.deepcopy(self)
+            # temp = newNode._nodeState[i,j]
+            # newNode.nodeState[i,j]=newNode.nodeState[newNode.blankTileLocation[0,0],newNode.blankTileLocation[0,1]]
+            # newNode.nodeState[newNode.blankTileLocation[0,0],newNode.blankTileLocation[0,1]] = temp
+            # return [True,newNode]
+        # return [False,None]
 
 
-    def actionMoveUp(self):
-        i,j= np.add(self._blankTileLoc,[0,1])
-        if(i>=0  and i<3 and j>=0 and j<3):
-            newNode = copy.deepcopy(self)
-            temp = newNode._nodeState[i,j]
-            newNode.nodeState[i,j]=newNode.nodeState[newNode.blackTileLoc[0,0],newNode._blackTileLoc[0,1]]
-            newNode._nodeState[newNode._blackTileLoc[0,0],newNode._blackTileLoc[0,1]] = temp
-            return [True,newNode]
-        return [False,newNode]
+    # def actionMoveUp(self):
+        # i,j= np.add(self._blankTileLoc,[0,1])
+        # if(i>=0  and i<3 and j>=0 and j<3):
+            # newNode = copy.deepcopy(self)
+            # temp = newNode._nodeState[i,j]
+            # newNode.nodeState[i,j]=newNode.nodeState[newNode.blankTileLocation[0,0],newNode.blankTileLocation[0,1]]
+            # newNode._nodeState[newNode.blankTileLocation[0,0],newNode.blankTileLocation[0,1]] = temp
+            # return [True,newNode]
+        # return [False,None]
 
-    def actionMoveDown(self):
-        if(i>=0  and i<3 and j>=0 and j<3):
-            newNode = copy.deepcopy(self)
-            temp = newNode._nodeState[i,j]
-            newNode.nodeState[i,j]=newNode.nodeState[newNode.blackTileLoc[0,0],newNode._blackTileLoc[0,1]]
-            newNode._nodeState[newNode._blackTileLoc[0,0],newNode._blackTileLoc[0,1]] = temp
-            return [True,newNode]
-        return [False,newNode]
+    # def actionMoveDown(self):
+        # if(i>=0  and i<3 and j>=0 and j<3):
+            # newNode = copy.deepcopy(self)
+            # temp = newNode._nodeState[i,j]
+            # newNode.nodeState[i,j]=newNode.nodeState[newNode.blankTileLoc[0,0],newNode.blankTileLoc[0,1]]
+            # newNode._nodeState[newNode.blankTileLocation[0,0],newNode.blankTileLocation[0,1]] = temp
+            # return [True,newNode]
+        # return [False,None]
 
 
