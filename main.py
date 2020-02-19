@@ -10,7 +10,6 @@ def generatePath(dictionary,node):
         cur = dictionary[cur.parentIndex]
     print(cur.nodeState)
 
-
 def convertArrayToString(node):
     H = node.nodeState
     s = ""
@@ -39,7 +38,7 @@ nodesExplored = {}
 visitedNodes = set()
 
 count = 1
-while(True):
+while(len(nodesQueue) != 0):
     node = nodesQueue.pop()
 
     if((node.nodeState == goalMat).all()):
