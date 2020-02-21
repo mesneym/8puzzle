@@ -39,12 +39,16 @@ class Node(object):
     @property
     def nodeState(self):
         return self._nodeState
-
+     
     @property 
     def blankTileLocation(self):
+
+        #If blankTileLocation has already been updated
+        #return blankTile,otherwise loop through matrix and 
+        #return the location of blankTile
         if(self._blankTileLoc != -1):
             return self._blankTileLoc
-        else:
+        else: 
             for i in range(3):
                 for j in range(3):
                     if(self._nodeState[i,j]==0):
@@ -58,12 +62,24 @@ class Node(object):
     @property 
     def nodeState(self):
         return self._nodeState 
+    
+    ########################################################
+    # @brief - moves the blanktile in a specified direction
+    # @param - direction - direction to move the blank tile
+    # @return - Returns a new node with its node state modified
+    #           with the new position of blank tile
+    ########################################################
 
     def moveTile(self,direction):
+        #calculating new position of blank tile
         i,j= np.add(self.blankTileLocation,direction)
+       
+        #check to see if position satisfies matrix dimensions
         if(i>=0  and i<3 and j>=0 and j<3):
-            newNode = copy.deepcopy(self)
-            temp = newNode.nodeState[i,j]
+            newNode = copy.deepcopy(self) #create a newNode
+
+            #update blank tile position by perfoming a swap
+            temp = newNode.nodeState[i,j] 
             newNode.nodeState[i,j]= 0
             newNode.nodeState[newNode.blankTileLocation[0], \
                               newNode.blankTileLocation[1]] = temp
