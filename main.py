@@ -3,6 +3,27 @@ from collections import deque
 from Nodes import Node
 
 
+
+
+#############################################
+# @brief - prints the state of a puzzle
+#
+# @param - puzzle state as a matrix
+#
+# @return - None
+#############################################
+def print_matrix(state):
+    counter = 0
+    for row in range(0, len(state), 3):
+        if counter == 0 :
+            print("-------------")
+        for element in range(counter, len(state), 3):
+            if element <= counter:
+                print("|", end=" ")
+            print(int(state[element]), "|", end=" ")
+        counter = counter +1
+        print("\n-------------")
+
 ############################################
 # @brief- This function generates the path
 #         from the root Node to goal Node 
@@ -61,7 +82,7 @@ def solvability(node):
     for i in range(0,8):
         for j in range(i+1,9):
             if(h[i] and h[i]>h[j]):
-                invCount++
+                invCount += 1
     return (invCount%2 == 0)
 
 
@@ -85,7 +106,7 @@ def addNode(nodesQueue,newNode,visitedNodes):
 
 
 # Reading goal and initial matrix from file
-gx,gy,gz,x,y,z= np.loadtxt('./mat.csv', delimiter=',' ,unpack=True, skiprows=1)
+gx,gy,gz,x,y,z= np.loadtxt('mat.csv', delimiter=',' ,unpack=True, skiprows=1)
 mat = np.column_stack((x,y,z))
 mat= mat.astype(int)
 goalMat= np.column_stack((gx,gy,gz))
@@ -143,4 +164,21 @@ else:
                     count += 1
     f.close()
     fd.close()
+
+
+    fname = 'nodePath.txt'
+    data = np.loadtxt(fname)
+    if len(data[1]) is not 9:
+        print("Format of the text file is incorrect, retry ")
+    else:
+        for i in range(0, len(data)):
+            if i == 0:
+                print("Start Node")
+            elif i == len(data)-1:
+                print("Achieved Goal Node")
+            else:
+                print("Step ",i)
+            print_matrix(data[i])
+            print()
+            print()
 
