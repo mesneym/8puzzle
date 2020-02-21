@@ -1,4 +1,4 @@
-#8 puzzle 
+# 8 puzzle 
 8 puzzle problem solved with bruteforce Breadth First Search(BFS)
 
 ### Description
