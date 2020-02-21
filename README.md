@@ -11,11 +11,13 @@ Numpy
 
 ### Run Code
 Input your matrix in mat.csv. The first three columns represents the goal matrix 
-and the last three columns represents the initial matrix.The zero elements represents the
-blank tile. NB. The first row should be left unchanged 
+and the last three columns represents the initial matrix(Replace this with your own matrix).The zero elements represents the
+blank tile. NB. The first row should be left unchanged.
 
-Enter the following to run the code,
+Enter the following to generate output files.
+
 ```
+cd <path with 8 puzzle folder>/8puzzle
 python3 main.py
 ```
 
