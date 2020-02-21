@@ -1,12 +1,24 @@
+###############################################
+# @file - This file contains the implementation
+#        of Node class
+###############################################
 import numpy as np
 import copy
 
+
 class Node(object):
+
+    ################################################
+    # @brief - constructor for node class 
+    # @param - 1.state-State of matrix puzzle
+    #          2.index- Index of node 
+    #          3.parentIndex- Index of parent node
+    ################################################
     def __init__(self,state,index,parentIndex):
-        self._nodeState = state
+        self._nodeState = state 
         self._index = index
         self._parentIndex = parentIndex
-        self._blankTileLoc = -1
+        self._blankTileLoc = -1 #stores location of blankTile
 
     @property
     def index(self):
