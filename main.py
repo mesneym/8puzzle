@@ -1,8 +1,13 @@
+#############################################
+# @brief Prints the path needed to move from
+#       inital state to goal state and also
+#       outputs the nodes information to a 
+#       text file
+#############################################
+
 import numpy as np
 from collections import deque
 from Nodes import Node
-
-
 
 
 #############################################
@@ -24,12 +29,13 @@ def print_matrix(state):
         counter = counter +1
         print("\n-------------")
 
+
 ############################################
 # @brief- This function generates the path
 #         from the root Node to goal Node 
 #
 # @param- 1.dictionary holding explored nodes
-#          2. goal node 
+#         2. goal node 
 #
 # @return None
 ############################################
