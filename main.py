@@ -14,11 +14,19 @@ from Nodes import Node
 ############################################
 def generatePath(dictionary,node):
     cur = node
+    l = []
+    count = 0
     while(cur.parentIndex != -1):
-        print(cur.nodeState)
-        print("=============")
+        l.append(cur.nodeState)
+        count += 1
         cur = dictionary[cur.parentIndex]
-    print(cur.nodeState)
+
+    l.append(cur.nodeState) 
+    f = open('./nodePath.txt','w')
+    for i in range(len(l)-1,-1,-1):
+        n = l[i].flatten('F')
+        np.savetxt(f,n.reshape(1,len(n)),delimiter=' ',fmt='%d')
+    f.close()
 
 
 #############################################
@@ -48,7 +56,13 @@ def convertArrayToString(node):
 # @return String representation of node state
 #############################################
 def solvability(node):
-    return True
+    h = root.nodeState.flatten() 
+    invCount = 0
+    for i in range(0,8):
+        for j in range(i+1,9):
+            if(h[i] and h[i]>h[j]):
+                invCount++
+    return (invCount%2 == 0)
 
 
 #############################################
@@ -71,7 +85,7 @@ def addNode(nodesQueue,newNode,visitedNodes):
 
 
 # Reading goal and initial matrix from file
-gx,gy,gz,x,y,z= np.loadtxt('mat.csv', delimiter=',' ,unpack=True, skiprows=1)
+gx,gy,gz,x,y,z= np.loadtxt('./mat.csv', delimiter=',' ,unpack=True, skiprows=1)
 mat = np.column_stack((x,y,z))
 mat= mat.astype(int)
 goalMat= np.column_stack((gx,gy,gz))
@@ -96,26 +110,27 @@ visitedNodes = set()
 count = 1 #counts number of nodes seen so far
 
 if( not solvability(root)): #To be modified
-    print("Not solvable")
-else:
+    print("not solvable")
 
-    # f = open('./NodesInfo.txt','w')
-    # f.write(str(root.index)+ " " + str(root.parentIndex)+"\n")
-     
-    # fd = open('./Nodes.txt','w')
-    # np.savetxt(fd,root.nodeState.flatten())
+else:
+    f = open('./NodesInfo.txt','w')
+    fd = open('./Nodes.txt','w')
 
     while(len(nodesQueue) != 0):
         node = nodesQueue.pop()
+
+        #mark node as visited by updating nodesExplored and visitedNodes
+        nodesExplored[node.index] = node  
+        visitedNodes.add(convertArrayToString(node)) 
+        
+        f.write(str(node.index)+ " " + str(node.parentIndex) + " "+str(0) + "\n")
+        n = node.nodeState.flatten('F')
+        np.savetxt(fd,n.reshape(1,len(n)),delimiter=' ',fmt='%d')
 
         if((node.nodeState == goalMat).all()): # check if goal is reached
             generatePath(nodesExplored,node) # generate path from goal node  
             break;                           # from goal node to root node
         
-        #mark node as visited by updating nodesExplored and visitedNodes
-        nodesExplored[node.index] = node  
-        visitedNodes.add(convertArrayToString(node)) 
-
         #moveTile in 4 directions(up,left,down,right) and 
         #add new nodes to nodeQueue
         for i in range(4): 
@@ -125,11 +140,7 @@ else:
                 newNode.parentIndex = node.index
 
                 if(addNode(nodesQueue,newNode,visitedNodes)):
-                    # f.write(str(newNode.index)+ " " + str(newNode.parentIndex) + "\n")
-                    # fd.write("\n")
-                    # n= newNode.nodeState.flatten().reshape(9,1))
-                    # np.savetxt(fd,n)
                     count += 1
-    # f.close()
-    # fd.close()
+    f.close()
+    fd.close()
 
