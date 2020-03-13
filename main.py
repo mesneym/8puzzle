@@ -87,7 +87,7 @@ def solvability(node):
     invCount = 0
     for i in range(0,8):
         for j in range(i+1,9):
-            if(h[i] and h[i]>h[j]):
+            if(h[j] and h[i] and h[i]>h[j]):
                 invCount += 1
     return (invCount%2 == 0)
 
@@ -117,6 +117,10 @@ mat = np.column_stack((x,y,z))
 mat= mat.astype(int)
 goalMat= np.column_stack((gx,gy,gz))
 goalMat= goalMat.astype(int)
+
+# print(mat)
+# print(goalMat)
+
 
 #Initializing root node with matrix and setting 
 # appropriate indices
